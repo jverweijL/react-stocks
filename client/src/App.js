@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+const corsProxy = '';//'https://cors-anywhere.herokuapp.com/';
 const stocksUrl = `${corsProxy}https://query1.finance.yahoo.com/v8/finance/chart/GME`;
 async function getStocks() {
   const response = await fetch(stocksUrl);
@@ -21,7 +21,7 @@ const [priceTime, setPriceTime] = useState(null);
       const stock = data.chart.result[0];
       setPrice(stock.meta.regularMarketPrice.toFixed(2));
       setPriceTime(new Date(stock.meta.regularMarketTime * 1000));
-      timeoutId = setTimeout(getLatestPrice,5000);
+      timeoutId = setTimeout(getLatestPrice,15000);
     }
 
     timeoutId = setTimeout(getLatestPrice,2000);
@@ -35,7 +35,15 @@ const [priceTime, setPriceTime] = useState(null);
   return (
     <div className="price">
       {price}
-      <div className="pricetime">{priceTime && priceTime.toLocaleTimeString()}</div>
+      <div className="pricetime">{priceTime && new Intl.DateTimeFormat('en-US', 
+      {
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit" 
+      }).format(priceTime)}</div>
     </div>
   );
 }
