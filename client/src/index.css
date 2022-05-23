@@ -10,3 +10,8 @@ body {
 .price {
   font-size: 3em;
 }
+
+.pricetime {
+  font-size: 0.3em;
+  color:silver;
+}

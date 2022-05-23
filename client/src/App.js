@@ -11,6 +11,7 @@ async function getStocks() {
 
 function App() {
 const [price, setPrice] = useState(-1);
+const [priceTime, setPriceTime] = useState(null);
 
   useEffect(() => {
     let timeoutId;
@@ -19,6 +20,7 @@ const [price, setPrice] = useState(-1);
       const data = await getStocks();
       const stock = data.chart.result[0];
       setPrice(stock.meta.regularMarketPrice.toFixed(2));
+      setPriceTime(new Date(stock.meta.regularMarketTime * 1000));
       timeoutId = setTimeout(getLatestPrice,5000);
     }
 
@@ -33,6 +35,7 @@ const [price, setPrice] = useState(-1);
   return (
     <div className="price">
       {price}
+      <div className="pricetime">{priceTime && priceTime.toLocaleTimeString()}</div>
     </div>
   );
 }
