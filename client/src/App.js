@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 const corsProxy = '';//'https://cors-anywhere.herokuapp.com/';
